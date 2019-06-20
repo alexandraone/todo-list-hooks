@@ -10,6 +10,11 @@ class CreateTodo extends React.Component {
     this.setState({ todoTitle: e.target.value });
   };
 
+  onClick = () => {
+      this.props.addTodo(this.state.todoTitle);
+      this.setState({ todoTitle: '' });
+  };
+
   render() {
     return (
       <div>
@@ -19,10 +24,7 @@ class CreateTodo extends React.Component {
           <button
             className="ui button"
             type="button"
-            onClick={() => {
-              this.props.addTodo(this.state.todoTitle);
-              this.setState({ todoTitle: '' })
-            }}>
+            onClick={this.onClick}>
             Add Todo
           </button>
         </div>
@@ -33,7 +35,6 @@ class CreateTodo extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { todos: state.todos };
 };
 

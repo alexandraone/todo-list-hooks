@@ -6,7 +6,13 @@ import { createStore } from 'redux';
 import App from './components/App';
 import reducers from './reducers';
 
-const store = createStore(reducers);
+const persistedState = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : {};
+
+const store = createStore(reducers, persistedState);
+
+store.subscribe(() => {
+  localStorage.setItem('todos', JSON.stringify(store.getState()));
+});
 
 ReactDOM.render(
   <Provider store={store}>

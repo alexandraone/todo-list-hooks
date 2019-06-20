@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/types';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, ADD_LIST } from '../actions/types';
 
 export default (state = [], action) => {
   switch (action.type) {

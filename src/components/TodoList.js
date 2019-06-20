@@ -6,6 +6,7 @@ import { Icon, List } from 'semantic-ui-react';
 class TodoList extends React.Component {
   removeTodo = (id) => {
     this.props.deleteTodo(id);
+
   };
 
   toggleTodo = (id) => {
@@ -45,7 +46,6 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { todos: state.todos };
 };
 
