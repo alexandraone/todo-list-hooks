@@ -21,9 +21,9 @@ class TodoList extends React.Component {
               {this.props.todos.map(todo => (
                 <List.Item key={todo.id}>
                   <List.Content key={todo.id} floated='left' style={{
-                    textDecoration: todo.clicked ? "line-through" : "none"
+                    textDecoration: todo.completed ? "line-through" : "none"
                   }}>
-                    {todo.title} {todo.clicked === true ? "(completed)" : ""}
+                    {todo.title} {todo.completed === true ? "(completed)" : ""}
                   </List.Content>
                   <List.Content floated='right'>
                     <button onClick={() => this.removeTodo(todo.id)}><Icon name="minus circle"/></button>

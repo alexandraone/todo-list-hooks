@@ -10,7 +10,7 @@ export const addTodo = title => {
   return {
     type: ADD_TODO,
     title,
-    clicked: false,
+    completed: false,
     id: nextTodoId++
   }
 };
