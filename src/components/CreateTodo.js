@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input } from 'semantic-ui-react';
+import { Input, Container, Grid } from 'semantic-ui-react';
 import { addTodo } from '../actions';
+import Todo from './Todo';
 
 class CreateTodo extends React.Component {
   state = { todoTitle: '' };
@@ -11,31 +12,38 @@ class CreateTodo extends React.Component {
   };
 
   onClick = () => {
-      this.props.addTodo(this.state.todoTitle);
-      this.setState({ todoTitle: '' });
+    const todoListId = this.props.location.state.todoListId;
+    this.props.addTodo(this.state.todoTitle, todoListId);
+    this.setState({ todoTitle: '' });
   };
 
   render() {
+    const todoListId = this.props.location.state.todoListId;
     return (
-      <div>
-        <h3>Todo List</h3>
-        <div className="ui action input">
-          <Input onChange={this.onChange} value={this.state.todoTitle} type="text" placeholder="Add todo"/>
-          <button
-            className="ui button"
-            type="button"
-            onClick={this.onClick}>
-            Add Todo
-          </button>
-        </div>
-      </div>
+      <Container>
+        <Grid className="segment centered">
+          <Grid.Row>
+            <Grid.Column>
+              <h2>Todo List: {this.props.lists.filter(list => list.id === todoListId)[0].title }</h2>
+              <Input onChange={this.onChange} value={this.state.todoTitle} type="text" placeholder="Add todo"/>
+              <button
+                className="ui button"
+                type="button"
+                onClick={this.onClick}>
+                Add Todo
+              </button>
+              <Todo todoListId={todoListId}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 
 }
 
 const mapStateToProps = (state) => {
-  return { todos: state.todos };
+  return { todos: state.todos, lists: state.lists };
 };
 
 export default connect(mapStateToProps, { addTodo })(CreateTodo);

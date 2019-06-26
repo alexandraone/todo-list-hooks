@@ -1,44 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTodo, toggleTodo } from '../actions';
+import { deleteTodoList } from '../actions';
 import { Icon, List } from 'semantic-ui-react';
+import history from '../history';
 
-class TodoList extends React.Component {
-  removeTodo = (id) => {
-    this.props.deleteTodo(id);
-
-  };
-
-  toggleTodo = (id) => {
-    this.props.toggleTodo(id);
+class Todo extends React.Component {
+  removeTodoList = (id) => {
+    this.props.deleteTodoList(id);
   };
 
   render() {
     return (
       <div>
-        {(this.props.todos.length) ? (
-            <List divided verticalAlign='middle'>
-              {this.props.todos.map(todo => (
-                <List.Item key={todo.id}>
-                  <List.Content key={todo.id} floated='left' style={{
-                    textDecoration: todo.completed ? "line-through" : "none"
-                  }}>
-                    {todo.title} {todo.completed === true ? "(completed)" : ""}
-                  </List.Content>
-                  <List.Content floated='right'>
-                    <button onClick={() => this.removeTodo(todo.id)}><Icon name="minus circle"/></button>
-                    <button onClick={() => this.toggleTodo(todo.id)}><Icon name="check circle"/></button>
-                  </List.Content>
-                </List.Item>))}
-            </List>) : (<div
-              style={{ marginTop: "50px" }}
-              className="col-lg-10 col-md-10 col-xs-12 col-sm-12 offset-lg-1"
-            >
-              <div className="alert alert-danger" role="alert">
-                Todo List is empty
-              </div>
+        {(this.props.lists.length) ? (
+          <List divided verticalAlign='middle'>
+            {this.props.lists.map(list => (
+              <List.Item key={list.id}
+                         onClick={() => history.push({ pathname: '/todo', state: { todoListId: list.id } })}>
+                <List.Icon name="list" size="large" verticalAlign="middle"/>
+                <List.Content key={list.id} floated='left'>
+                  <List.Header>
+                    {list.title}
+                  </List.Header>
+                </List.Content>
+                <List.Content floated='right'>
+                  <button onClick={() => this.removeTodoList(list.id)}><Icon name="minus circle"/></button>
+                </List.Content>
+              </List.Item>
+              ))}
+          </List>) : (<div
+            style={{ marginTop: "50px" }}
+            className="col-lg-10 col-md-10 col-xs-12 col-sm-12 offset-lg-1"
+          >
+            <div className="alert alert-danger" role="alert">
+              Todo List is empty
             </div>
-          )
+          </div>
+        )
         }
       </div>
     );
@@ -46,7 +44,7 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { todos: state.todos };
+  return { lists: state.lists };
 };
 
-export default connect(mapStateToProps, { deleteTodo, toggleTodo })(TodoList);
+export default connect(mapStateToProps, { deleteTodoList })(Todo);

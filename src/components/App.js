@@ -1,20 +1,17 @@
 import React from 'react';
-import { Grid, Container } from 'semantic-ui-react';
+import { Router, Route, Switch } from 'react-router-dom';
+import CreateList from './CreateList';
+import history from '../history';
 import CreateTodo from './CreateTodo';
-import DeleteTodo from './TodoList';
 
 const App = () => {
   return (
-    <Container>
-      <Grid className="segment centered">
-        <Grid.Row>
-          <Grid.Column>
-            <CreateTodo/>
-            <DeleteTodo/>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Container>
+    <Router history={history}>
+      <Switch>
+            <Route exact path="/" component={CreateList} />
+            <Route path="/todo" component={CreateTodo}/>
+      </Switch>
+    </Router>
   );
 };
 
