@@ -1,42 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Container, Grid } from 'semantic-ui-react';
+import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { addTodo } from '../actions';
-import Todo from './Todo';
 
 class CreateTodo extends React.Component {
-  state = { todoTitle: '' };
+  state = { todoTitle: '', open: false };
+
+  show = () => this.setState({ open: true });
+  close = () => this.setState({ open: false });
 
   onChange = (e) => {
     this.setState({ todoTitle: e.target.value });
   };
 
   onClick = () => {
-    const todoListId = this.props.location.state.todoListId;
+    const todoListId = this.props.todoListId;
     this.props.addTodo(this.state.todoTitle, todoListId);
-    this.setState({ todoTitle: '' });
+    this.setState({ todoTitle: '', open: false });
   };
 
   render() {
-    const todoListId = this.props.location.state.todoListId;
+    const { open } = this.state;
     return (
-      <Container>
-        <Grid className="segment centered">
-          <Grid.Row>
-            <Grid.Column>
-              <h2>Todo List: {this.props.lists.filter(list => list.id === todoListId)[0].title }</h2>
-              <Input onChange={this.onChange} value={this.state.todoTitle} type="text" placeholder="Add todo"/>
-              <button
-                className="ui button"
-                type="button"
-                onClick={this.onClick}>
-                Add Todo
-              </button>
-              <Todo todoListId={todoListId}/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <div>
+        <Button onClick={this.show}><Icon name="plus" color='orange' size='large' />Add</Button>
+        <Modal size={'mini'} open={open} onClose={this.close}>
+          <Modal.Header>Add a Todo</Modal.Header>
+          <Modal.Content>
+            <Input onChange={this.onChange} value={this.state.todoTitle} type="text" placeholder="Add Todo" />
+          </Modal.Content>
+          <Modal.Actions>
+            <Button negative onClick={() => this.setState({ open: false })}>Cancel</Button>
+            <Button positive onClick={this.onClick}>Add List</Button>
+          </Modal.Actions>
+        </Modal>
+      </div>
+
     );
   }
 

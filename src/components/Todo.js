@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodo } from '../actions';
-import { Icon, List } from 'semantic-ui-react';
-import { Grid } from "semantic-ui-react/dist/commonjs/collections/Grid/Grid";
+import { List } from 'semantic-ui-react';
 
 class Todo extends React.Component {
   removeTodo = (id) => {
@@ -28,8 +27,8 @@ class Todo extends React.Component {
                     {todo.title} {todo.completed === true ? "(completed)" : ""}
                   </List.Content>
                   <List.Content floated='right'>
-                    <button onClick={() => this.removeTodo(todo.id)}><Icon name="minus circle"/></button>
-                    <button onClick={() => this.toggleTodo(todo.id)}><Icon name="check circle"/></button>
+                    <List.Icon name="minus circle" size="large" link onClick={() => this.removeTodo(todo.id)}/>
+                    <List.Icon name="check circle" size="large" link onClick={() => this.toggleTodo(todo.id)}/>
                   </List.Content>
                 </List.Item>))}
             </List>) : (<div
@@ -48,7 +47,6 @@ class Todo extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { todos: state.todos };
 };
 

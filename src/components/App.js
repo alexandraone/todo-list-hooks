@@ -1,15 +1,15 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import CreateList from './CreateList';
 import history from '../history';
-import CreateTodo from './CreateTodo';
+import TodoLists from './TodoLists';
+import Todos from './Todos';
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
-            <Route exact path="/" component={CreateList} />
-            <Route path="/todo" component={CreateTodo}/>
+            <Route exact path="/" component={TodoLists} />
+            <Route path="/todo" component={Todos}/>
       </Switch>
     </Router>
   );

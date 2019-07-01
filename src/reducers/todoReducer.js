@@ -2,7 +2,6 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/types';
 
 function getId(state) {
   if(state.length > 0) {
-    console.log(state[state.length-1]);
     return state[state.length-1]["id"] + 1;
   }
   else return 1;
