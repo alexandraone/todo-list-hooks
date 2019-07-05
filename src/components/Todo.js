@@ -13,6 +13,17 @@ class Todo extends React.Component {
     this.props.toggleTodo(id);
   };
 
+  dueDate = (todo) => {
+    const today = new Date().toLocaleDateString();
+    if (today === todo.dueDate) {
+      return 'Today';
+    } else if (today < todo.dueDate) {
+      return `Due date:${todo.dueDate}`
+    } else {
+      return 'Due date has passed';
+    }
+  };
+
   render() {
     const todosInList = this.props.todos.filter(todo => todo.todoListId === this.props.todoListId);
     return (
@@ -30,6 +41,7 @@ class Todo extends React.Component {
                     <List.Icon name="minus circle" size="large" link onClick={() => this.removeTodo(todo.id)}/>
                     <List.Icon name="check circle" size="large" link onClick={() => this.toggleTodo(todo.id)}/>
                   </List.Content>
+                  {this.dueDate(todo)}
                 </List.Item>))}
             </List>) : (<div
               style={{ marginTop: "50px" }}

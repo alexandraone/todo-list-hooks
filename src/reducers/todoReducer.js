@@ -11,7 +11,7 @@ export default (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
-        ...state, { title: action.title, id: getId(state), completed: action.completed, todoListId: action.todoListId }];
+        ...state, { title: action.title, id: getId(state), completed: action.completed, dueDate: action.dueDate, todoListId: action.todoListId }];
     case TOGGLE_TODO:
       return state.map(todo => (todo.id === action.id) ? {...todo, completed: !todo.completed} : todo);
     case DELETE_TODO:

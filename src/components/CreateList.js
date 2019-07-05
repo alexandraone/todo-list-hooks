@@ -39,7 +39,6 @@ class CreateList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { lists: state.lists };
 };
 
