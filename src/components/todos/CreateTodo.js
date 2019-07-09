@@ -5,7 +5,7 @@ import { addTodo } from '../../actions/index';
 import Form from './TodoForm';
 
 class CreateTodo extends React.Component {
-  state = {  dueDate: '', open: false };
+  state = { open: false };
 
   show = () => this.setState({ open: true });
   close = () => this.setState({ open: false });

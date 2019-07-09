@@ -3,7 +3,7 @@ import { Header, Segment, Container } from 'semantic-ui-react';
 import TodoList from './TodoList';
 import CreateList from './CreateList';
 
-const TodoLists = (props) => {
+const TodoLists = () => {
     return (
       <Container>
         <Segment clearing>
