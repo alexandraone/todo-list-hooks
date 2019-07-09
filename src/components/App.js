@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '../history';
-import TodoLists from './TodoLists';
-import Todos from './Todos';
+import TodoLists from './lists/TodoLists';
+import Todos from './todos/Todos';
 
 const App = () => {
   return (

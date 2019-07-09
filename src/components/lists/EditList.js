@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
-import { editTodoList } from '../actions';
-import EditListForm from './EditListForm';
+import { editTodoList } from '../../actions/index';
+import Form from './ListForm';
 
 class EditList extends React.Component {
   state = { open: false };
@@ -23,9 +23,11 @@ class EditList extends React.Component {
         <Modal size={'mini'} open={open} onClose={this.close}>
           <Modal.Header>Edit title</Modal.Header>
           <Modal.Content>
-            <EditListForm
+            <Form
               initialValues={{ title: this.props.list[0].title }}
               onSubmit={this.onSubmit}
+              name='title'
+              label='Edit List'
             />
           </Modal.Content>
           <Modal.Actions>

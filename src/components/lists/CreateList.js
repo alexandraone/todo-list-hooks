@@ -1,21 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Icon, Modal } from 'semantic-ui-react';
-import { addTodoList } from '../actions';
+import { Button, Icon, Modal } from 'semantic-ui-react';
+import { addTodoList } from '../../actions/index';
+import Form from './ListForm';
 
 class CreateList extends React.Component {
-  state = { title: '', open: false };
+  state = { open: false };
 
   show = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
 
-  onChange = (e) => {
-    this.setState({ title: e.target.value });
-  };
 
-  onClick = () => {
-    this.props.addTodoList(this.state.title);
-    this.setState({ title: '', open: false });
+  onSubmit = (formValues) => {
+    this.props.addTodoList(formValues.title);
+    this.setState({ open: false });
   };
 
   render() {
@@ -26,11 +24,14 @@ class CreateList extends React.Component {
         <Modal size={'mini'} open={open} onClose={this.close}>
           <Modal.Header>Add a Todo List</Modal.Header>
           <Modal.Content>
-            <Input onChange={this.onChange} value={this.state.title} type="text" placeholder="Add Todo List"/>
+            <Form
+              onSubmit={this.onSubmit}
+              name='title'
+              label='Add Todo List'
+            />
           </Modal.Content>
           <Modal.Actions>
             <Button negative onClick={() => this.setState({ open: false })}>Cancel</Button>
-            <Button positive onClick={this.onClick}>Add List</Button>
           </Modal.Actions>
         </Modal>
       </div>

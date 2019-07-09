@@ -1,16 +1,16 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from "semantic-ui-react";
+import { Button } from 'semantic-ui-react';
 
-let EditListForm = props => {
-  const { handleSubmit } = props;
+let ListForm = props => {
+  const { handleSubmit, name, label } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Edit List</label>
+        <label>{label}</label>
         <div>
           <Field
-            name="title"
+            name={name}
             component="input"
             type="text"
           />
@@ -24,5 +24,5 @@ let EditListForm = props => {
 };
 
 export default reduxForm({
-  form: 'editList'
-})(EditListForm);
+  form: 'listForm'
+})(ListForm);
