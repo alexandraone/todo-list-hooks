@@ -11,7 +11,7 @@ class CreateTodo extends React.Component {
   close = () => this.setState({ open: false });
 
 
-  onSubmit = (formValues) => {
+  onSubmit = formValues => {
     const todoListId = this.props.todoListId;
     this.props.addTodo(formValues.title, formValues.dueDate, todoListId);
     this.setState({ open: false });

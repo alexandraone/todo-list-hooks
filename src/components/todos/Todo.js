@@ -5,16 +5,16 @@ import { List } from 'semantic-ui-react';
 import './Todo.css';
 
 class Todo extends React.Component {
-  removeTodo = (id) => {
+  removeTodo = id => {
     this.props.deleteTodo(id);
 
   };
 
-  toggleTodo = (id) => {
+  toggleTodo = id => {
     this.props.toggleTodo(id);
   };
 
-  dueDate = (todo) => {
+  dueDate = todo => {
     let result = 'Due:';
     const today = new Date().toLocaleDateString();
     if (today === todo.dueDate) {

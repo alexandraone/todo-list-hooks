@@ -11,7 +11,7 @@ class CreateList extends React.Component {
   close = () => this.setState({ open: false });
 
 
-  onSubmit = (formValues) => {
+  onSubmit = formValues => {
     this.props.addTodoList(formValues.title);
     this.setState({ open: false });
   };

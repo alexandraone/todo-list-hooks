@@ -10,7 +10,7 @@ class EditList extends React.Component {
   show = () => this.setState({ open: true });
   close = () => this.setState({ open: false });
 
-  onSubmit = (formValues) => {
+  onSubmit = formValues => {
     this.props.editTodoList(formValues.title, this.props.listId);
     this.setState({ open: false });
   };

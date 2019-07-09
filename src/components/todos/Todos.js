@@ -4,7 +4,7 @@ import CreateTodo from './CreateTodo';
 import Todo from "./Todo";
 import history from '../../history';
 
-const Todos = (props) => {
+const Todos = props => {
   const todoListId = props.location.state.todoListId;
 
   return (
