@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import { addTodoList } from '../../actions/index';
-import Form from './ListForm';
+import ListForm from './ListForm';
 
 const CreateList = () => {
   const [open, setOpen] = useState(false);
@@ -11,10 +11,13 @@ const CreateList = () => {
   const show = () => setOpen(true);
   const close = () => setOpen(false);
 
-  const onSubmit = formValues => {
-    dispatch(addTodoList(formValues.title));
-    setOpen(false);
-  };
+  const onSubmit = useCallback(
+    (formValues) => {
+      dispatch(addTodoList(formValues.title));
+      setOpen(false);
+    },
+    [dispatch]
+  );
 
   return (
     <div>
@@ -25,7 +28,7 @@ const CreateList = () => {
       <Modal size={'mini'} open={open} onClose={close}>
         <Modal.Header>Add a Todo List</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={onSubmit} name="title" label="Add Todo List" />
+          <ListForm onSubmit={onSubmit} name="title" label="Add Todo List" />
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => setOpen(false)}>

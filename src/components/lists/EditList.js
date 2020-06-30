@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import { editTodoList } from '../../actions/index';
-import Form from './ListForm';
+import ListForm from './ListForm';
 
-const EditList = props => {
+const EditList = ({ listId }) => {
   const [open, setOpen] = useState(false);
-  const list = useSelector(state =>
-    state.lists.filter(list => list.id === props.listId)
-  );
   const dispatch = useDispatch();
+  const list = useSelector((state) =>
+    state.lists.filter((list) => list.id === listId)
+  );
 
   const show = () => setOpen(true);
   const close = () => setOpen(false);
 
-  const onSubmit = formValues => {
-    dispatch(editTodoList(formValues.title, props.listId));
-    setOpen(false);
-  };
+  const onSubmit = useCallback(
+    (formValues) => {
+      dispatch(editTodoList(formValues.title, listId));
+      setOpen(false);
+    },
+    [dispatch, listId]
+  );
 
   return (
     <div>
@@ -25,7 +28,7 @@ const EditList = props => {
       <Modal size={'mini'} open={open} onClose={close}>
         <Modal.Header>Edit title</Modal.Header>
         <Modal.Content>
-          <Form
+          <ListForm
             initialValues={{ title: list[0].title }}
             onSubmit={onSubmit}
             name="title"

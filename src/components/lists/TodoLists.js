@@ -1,22 +1,20 @@
 import React from 'react';
-import { Header, Segment, Container } from 'semantic-ui-react';
-import TodoList from './TodoList';
+import { Container, Header, Segment } from 'semantic-ui-react';
 import CreateList from './CreateList';
+import TodoList from './TodoList';
 
-const TodoLists = () => {
-    return (
-      <Container>
-        <Segment clearing>
-          <Header as='h2' floated='left'>
-            Todo Lists
-          </Header>
-          <Header as='h2' floated='right'>
-            <CreateList/>
-          </Header>
-        </Segment>
-          <TodoList />
-      </Container>
-    );
-};
+const TodoLists = () => (
+    <Container>
+      <Segment clearing>
+        <Header as="h2" floated="left">
+          Todo Lists
+        </Header>
+        <Header as="h2" floated="right">
+          <CreateList />
+        </Header>
+      </Segment>
+      <TodoList />
+    </Container>
+  );
 
 export default TodoLists;
