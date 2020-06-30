@@ -1,23 +1,23 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteTodo, toggleTodo } from '../../actions/index';
+import { useDispatch, useSelector } from 'react-redux';
 import { List } from 'semantic-ui-react';
+import { deleteTodo, toggleTodo } from '../../actions/index';
 import './Todo.css';
 
-const Todo = props => {
-  const todos = useSelector(state => state.todos);
+const Todo = ({ todoListId }) => {
+  const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
-  const removeTodo = id => {
+  const removeTodo = (id) => {
     dispatch(deleteTodo(id));
   };
 
-  const toggleTodos = id => {
+  const toggleTodos = (id) => {
     dispatch(toggleTodo(id));
   };
 
-  const dueDate = todo => {
-    let result = 'Due:';
+  let result = 'Due:';
+  const dueDate = (todo) => {
     const today = new Date().toLocaleDateString();
     if (today === todo.dueDate) {
       return `${result} Today`;
@@ -28,9 +28,7 @@ const Todo = props => {
     }
   };
 
-  const todosInList = todos.filter(
-    todo => todo.todoListId === props.todoListId
-  );
+  const todosInList = todos.filter((todo) => todo.todoListId === todoListId);
   return (
     <div>
       {todos.length ? (
@@ -42,7 +40,7 @@ const Todo = props => {
                 index % 2 === 0
                   ? {
                       backgroundColor: '#EFEFEF',
-                      padding: '10px'
+                      padding: '10px',
                     }
                   : { backgroundColor: 'white', padding: '10px' }
               }
@@ -65,7 +63,7 @@ const Todo = props => {
                 key={todo.id}
                 floated="left"
                 style={{
-                  textDecoration: todo.completed ? 'line-through' : 'none'
+                  textDecoration: todo.completed ? 'line-through' : 'none',
                 }}
               >
                 <p>
