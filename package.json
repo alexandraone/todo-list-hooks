@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "final-form": "^4.20.0",
+    "kind-of": "^6.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-final-form": "^6.5.0",
