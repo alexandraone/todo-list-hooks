@@ -1,20 +1,21 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteTodoList, deleteTodo } from '../../actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { List } from 'semantic-ui-react';
-import history from '../../history';
+import { deleteTodo, deleteTodoList } from '../../actions/index';
 import EditList from './EditList';
 
 const Todo = () => {
-  const lists = useSelector(state => state.lists);
-  const todos = useSelector(state => state.todos);
+  const lists = useSelector((state) => state.lists);
+  const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const removeTodoList = id => {
+  const removeTodoList = (id) => {
     dispatch(deleteTodoList(id));
     todos
-      .filter(todo => todo.todoListId === id)
-      .map(todo => dispatch(deleteTodo(todo.id)));
+      .filter((todo) => todo.todoListId === id)
+      .map((todo) => dispatch(deleteTodo(todo.id)));
   };
 
   return (
@@ -29,7 +30,7 @@ const Todo = () => {
                   index % 2 === 0
                     ? {
                         backgroundColor: '#EFEFEF',
-                        padding: '10px'
+                        padding: '10px',
                       }
                     : { backgroundColor: 'white', padding: '10px' }
                 }
@@ -52,7 +53,7 @@ const Todo = () => {
                     onClick={() =>
                       history.push({
                         pathname: '/todo',
-                        state: { todoListId: list.id, title: list.title }
+                        state: { todoListId: list.id, title: list.title },
                       })
                     }
                   >

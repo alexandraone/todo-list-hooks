@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
-import history from '../../history';
 import CreateTodo from './CreateTodo';
 import Todo from './Todo';
 
-const Todos = ({ location }) => {
+const Todos = ({ location, history }) => {
   const todoListId = location.state.todoListId;
+
+  const handleClick = useCallback(() => {
+    history.push('/');
+  }, [history]);
 
   return (
     <Container>
-      <Button
-        style={{ position: 'absolute', left: '0' }}
-        onClick={() => history.push('/')}
-      >
+      <Button style={{ position: 'absolute', left: '0' }} onClick={handleClick}>
         <Icon name="angle left" color="orange" size="large" />
         Home
       </Button>
